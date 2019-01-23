@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lzweb?characterEncoding=utf-8
+    username: root
+    password:
+    #使用druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      maxActive: 8
+      initialSize: 0
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 300000
+      minEvictableIdleTimeMillis: 3600000
+      validationQuery: select 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+
+
+mybatis:
+  mapper-locations: com/lezhuan/lzweb/mapper/*.xml
+  type-aliases-package: com.lezhuan.lzweb.po
+
+logging:
+  file: d:\lzweb.log
+
+

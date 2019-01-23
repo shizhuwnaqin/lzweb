@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lezhuan.lzweb.mapper.CustomMapper" >
+
+    <resultMap id="BaseResultMap" type="com.lezhuan.lzweb.po.Custom" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="custom_name" property="customName" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="env_id" property="envId" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, custom_name, user_id, env_id, status, update_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from custom
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from custom
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.lezhuan.lzweb.po.Custom" >
+        insert into custom (id, custom_name, user_id, 
+            env_id, status, update_time
+            )
+        values (#{id,jdbcType=INTEGER}, #{customName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+            #{envId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.lezhuan.lzweb.po.Custom" >
+        insert into custom
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="customName != null" >
+                custom_name,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="envId != null" >
+                env_id,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="customName != null" >
+                #{customName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="envId != null" >
+                #{envId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.lezhuan.lzweb.po.Custom" >
+        update custom
+        <set >
+            <if test="customName != null" >
+                custom_name = #{customName,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="envId != null" >
+                env_id = #{envId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.lezhuan.lzweb.po.Custom" >
+        update custom
+        set custom_name = #{customName,jdbcType=VARCHAR},
+            user_id = #{userId,jdbcType=INTEGER},
+            env_id = #{envId,jdbcType=INTEGER},
+            status = #{status,jdbcType=INTEGER},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
